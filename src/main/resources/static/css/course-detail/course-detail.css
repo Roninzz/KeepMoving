@@ -1,0 +1,96 @@
+* {
+
+    box-sizing: border-box;
+}
+
+body {
+
+    background-color: #f2f2f2;
+}
+
+
+#total {
+    width: 60%;
+    margin: auto;
+    /* background-color: yellow; */
+    /* position: relative; */
+}
+
+
+#div2 {
+
+    width: 10%;
+    margin-top: 2px;
+    background-color: rgb(255, 255, 255);
+    height: 80px;
+    padding-top: 13px;
+    padding-left: 20px;
+    font-size: 12px;
+    float: left;
+    /* background-color: red; */
+    /* position: absolute; */
+}
+
+#div2 a {
+    color: rgba(6, 6, 218, 0.603);
+}
+
+#div3 {
+
+    width: 20%;
+    margin-top: 2px;
+    /* margin-left: 1px; */
+    background-color: rgb(255, 255, 255);
+    height: 80px;
+    padding-top: 13px;
+    padding-left: 40px;
+    font-size: 12px;
+    float: left;
+    /* position: absolute; */
+}
+
+#div3 a {
+    color: rgba(6, 6, 218, 0.603);
+}
+
+#div4 {
+
+    width: 70%;
+    margin-top: 2px;
+    /* margin-left: 1px; */
+    background-color: rgb(255, 255, 255);
+    height: 80px;
+    padding-top: 13px;
+    padding-left: 40px;
+    font-size: 12px;
+    float: left;
+}
+
+#div5 {
+    width: 100%;
+    margin-top: 10px;
+    /* margin-left: 1px; */
+    background-color: rgb(255, 255, 255);
+    /* height: 400px; */
+    padding-top: 13px;
+    padding-left: 40px;
+    font-size: 12px;
+    float: left;
+    
+}
+
+#img1{
+    width: 40%;
+    margin-left:20px; 
+    margin-top: 10px;
+    float: left;
+    
+}
+
+#img2{
+    margin-left:20px; 
+    margin-top: 10px;
+    width: 40%;
+    float: left;
+}
+

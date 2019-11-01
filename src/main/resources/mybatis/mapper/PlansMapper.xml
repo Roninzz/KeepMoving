@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.keepmoving.fitness.mapper.plan.PlansMapper">
+    <select id="findAll" resultType="plans">
+        select * from plans
+        <where>
+            <if test="planName != null">
+                and plan_name like concat('%',#{planName},'%')
+            </if>
+            <if test="planTarget != null">
+                and plan_target = #{planTarget}
+            </if>
+            <if test="planDay != null">
+                and plan_day = #{planDay}
+            </if>
+            <if test="planEquipment != null">
+                and plan_equipment = #{planEquipment}
+            </if>
+            <if test="planTpoint != null">
+                and plan_tpoint = #{planTpoint}
+            </if>
+            <if test="planDifficult != null">
+                and plan_difficult = #{planDifficult}
+            </if>
+        </where>
+    </select>
+    <select id="findById" resultType="plans">
+        select * from plans where id = #{value};
+    </select>
+</mapper>

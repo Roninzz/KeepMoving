@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>健身训练计划</title>
+    
+    <link rel="stylesheet" href="../plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="../css/plan-index/plan-index.css">
+    <link rel="stylesheet" href="../css/nav/nav.css">
+
+</head>
+
+<body>
+<div id="app">
+    <!-- 响应式导航 begin -->
+    <div class="o-header">
+        <!-- 响应式导航 begin -->
+        <div class="layui-header header header-index">
+            <a class="logo" href="/KeepMovingFiness/index/hello">
+                KeepMoving
+            </a>
+
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item"><a href="/KeepMovingFiness/index/hello">首页</a></li>
+                <li class="layui-nav-item layui-this">
+                    <a href="/KeepMovingFiness/plan/plan-index.html">训练计划</a>
+                </li>
+                <li class="layui-nav-item"><a href="/KeepMovingFiness/action/action-list">健身动作</a></li>
+                <li class="layui-nav-item"><a href="/KeepMovingFiness/food/food-list">饮食健康</a></li>
+                <li v-if="user == null" class="layui-nav-item ">
+                    <a href="/KeepMovingFiness/loginAct">登录</a>
+                </li>
+                <li v-if="user == null" class="layui-nav-item ">
+                    <a href="/KeepMovingFiness/registerAct">注册</a>
+                </li>
+                <li v-if="user!=null" class="layui-nav-item">
+                    <a href="javascript:;" v-if="pic!=null"><img :src="pic.imgUrl" class="layui-nav-img">{{user.username}}</a>
+                    <a href="javascript:;" v-else="pic==null"><img src="../imgs/photo.png" class="layui-nav-img">{{user.username}}</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/KeepMovingFiness/person/center">个人中心</a></dd>
+                        <dd><a href="/KeepMovingFiness/per2">账号设置</a></dd>
+                        <dd><a @click="exit()" href="/KeepMovingFiness/plan/plan-index.html">退出账号</a></dd>
+                    </dl>
+                </li>
+                <li v-else="user==null" class="layui-nav-item ">
+                    <a href="/KeepMovingFiness/loginAct"><img src="../imgs/photo.png" class="layui-nav-img">未登录</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 导航栏结束 -->
+    </div>
+    <!-- 响应式导航 end -->
+
+    <div id="page" class="page">
+        <!-- 搜索菜单 begin -->
+        <div class="page-seek" id="page-seek">
+            <div class="page-seek-menu" id="page-seek-menu">
+                <div class="search">
+                    <div class="search-asid">
+                        <form method="GET" id="searchAsid" name="searchAsid" action="">
+                            <input  v-model.trim="typeahead" class="typeahead" type="text" placeholder="课程名">
+                        </form>
+                        <span @click="sear" class="search-icon"><img src="../imgs/plan-index/search.png" alt=""></span>
+                    </div>
+                </div>
+                <div class="group-course">
+                    <div class="group-hd">
+                        <i></i>
+                        <h3 class="h3">训练课程</h3>
+                    </div>
+                </div>
+                <div class="group-bd">
+                    <div class="group-bd-menu">
+                        <div class="menu-hd">
+                            <h3 class="menu-label target">训练目标</h3>
+                        </div>
+                        <div class="menu-bd">
+                            <a href="#" class="menu-sort" :model="targetActive" @click="target(index)" v-for="(item,index) in planTarget" :key="item.id" :class="{active:index==targetActive}">
+                                {{ item.name }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="group-bd-menu">
+                        <div class="menu-hd">
+                            <h3 class="menu-label target-day">每周训练天数</h3>
+                        </div>
+                        <div class="menu-bd">
+                            <a href="#" class="menu-sort" :model="dayActive" @click="day(index)" v-for="(item,index) in planDay" :key="item.id" :class="{active:index==dayActive}">
+                                {{ item.name }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="group-bd-menu">
+                        <div class="menu-hd">
+                            <h3 class="menu-label target-qi">器械要求</h3>
+                        </div>
+                        <div class="menu-bd">
+                            <a href="#" class="menu-sort" :model="equipmentActive" @click="equipment(index)" v-for="(item,index) in planEquipment" :key="item.id" :class="{active:index==equipmentActive}">
+                                {{ item.name }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="group-bd-menu">
+                        <div class="menu-hd">
+                            <h3 class="menu-label target-body">训练部位</h3>
+                        </div>
+                        <div class="menu-bd">
+                            <a href="#" class="menu-sort" :model="tpointActive" @click="tpoint(index)" v-for="(item,index) in planTpoint" :key="item.id" :class="{active:index==tpointActive}">
+                                {{ item.name }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="group-bd-menu">
+                        <div class="menu-hd">
+                            <h3 class="menu-label target-h">训练难度</h3>
+                        </div>
+                        <div class="menu-bd">
+                            <a href="#" class="menu-sort" :model="difficultActive" @click="difficult(index)" v-for="(item,index) in planDifficult" :key="item.id" :class="{active:index==difficultActive}">
+                                {{ item.name }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" id="menu-handler" class="menu-handler on"></a>
+        </div>
+        <div></div>
+        <!-- 搜索菜单 end -->
+        <!-- 所有计划列表 begin -->
+        <div id="page-main" class="page-main">
+            <div class="page-main-nav">
+                <div class="page-main-nav-host">
+                    <div class="page-main-list" id="page-main-list">
+                        <h1 class="train-list-title">所有训练计划{{text.planTarget}}{{text.planDay}}{{text.planEquipment}}{{text.planTpoint}}{{text.planDifficult}}</h1>
+                        <ul class="train-list">
+                            <li v-for='(category,index) in categoryList' :key = 'category.id'>
+                                <div class="list-item">
+                                    <span class="train-img"><img :src= "category.url" alt="" style="width: 222px;height: 122px"></span>
+                                    <!--<h2 class="train-title"><a :href="getPlan(category.id)">{{ category.planName }}</a></h2>-->
+                                    <h2 class="train-title" @click="getPlan(category.id)"><a :href="'/KeepMovingFiness/plan-detail/detail?id='+category.id">{{ category.planName }}</a></h2>
+
+
+                                    <p class="train-intro"><a
+                                            href="">{{ category.planIntroduction | ellipsis }}</a></p>
+                                    <p class="train-details">
+                                        <span>课时: &nbsp;<em>{{ category.planWeek }}周</em></span>
+                                        <span>天/周: &nbsp;<em>{{ category.planDay }}天</em></span>
+                                        <span>参与人数: &nbsp;<em>{{ category.planNum }}人</em></span>
+                                    </p>
+                                    <p class="train-details">
+                                        <span>强度: &nbsp;
+                                            <span class="wrap">
+                                                <span :style="'width:'+category.planDifficult*21+'px'"></span>
+                                            </span>
+                                        </span>
+                                        <span v-for="(item,index) in scorePlan" :key="item.id" v-if="category.id == item.planId">星级: &nbsp;
+                                            <span class="star">
+                                                <span :style="'width:'+item.score*16.8+'px'"></span>
+                                            </span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--分页-->
+                        <div class="mod-page">
+                            <div id="demo7">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="plan-war">
+                        <span class="plan-hot"></span>
+                        <img src="" alt="">
+                    </div> -->
+
+                    <!--排行榜-->
+                    <section class="rank">
+                        <header class="rank-head">
+                            <h3>排行</h3>
+                            <div class="rank-tab" >
+                                <div class="tab-item on" >按参与人数</div>
+                                <div id="tab-item" class="tab-item">按计划评分</div>
+                                <!--<div class="tab-item" :class="{on:index=hotActive}" @mouseover="over(index)" v-for="(item,index) in hotTitle" :key="item.id">{{item.name}}</div>-->
+                            </div>
+                
+                        </header>
+                        <div class="plan-war">
+                            <ul class="hot-list">
+                                <li class="hot-item " v-for="(item,index) in hotPlan" :key="item.id">
+                                    <i v-if="index<3" class="ri-num" style="background-color: #c83838">{{index+1}}</i>
+                                    <i v-else class="ri-num">{{index+1}}</i>
+                                    <a class="ri-info fo" @click="getPlan(item.id)" :href="'/KeepMovingFiness/plan-detail/detail?id='+item.id">
+                                        <div class="ri-img">
+                                            <img :src="item.url" alt="">
+                                        </div>
+                                        <div class="ri-mark">
+                                            <p class="ri-title">{{item.planName}}</p>
+                                            <p class="author" style="opacity: 1">参与人数:{{item.planNum}}人</p>
+                                            <p class="play">课时:{{item.planWeek}}周</p>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <ul class="hot-list">
+                                <li class="hot-item" v-for="(item,index) in scorePlan" :key="item.id">
+                                    <i v-if="index<3" class="ri-num" style="background-color: #c83838">{{index+1}}</i>
+                                    <i v-else class="ri-num">{{index+1}}</i>
+                                    <a class="ri-info fo" @click="getPlan(plan.id)" :href="'/KeepMovingFiness/plan-detail/detail?id='+plan.id" v-for="(plan,index) in allPlan" :key="plan.id" v-if="item.planId==plan.id">
+                                        <div class="ri-img">
+                                            <img :src="plan.url" alt="">
+                                        </div>
+                                        <div class="ri-mark">
+                                            <p class="ri-title">{{plan.planName}}</p>
+                                            <p class="author">课程评分:{{item.score}}星</p>
+                                            <p class="play">课时:{{plan.planWeek}}周</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!-- 所有计划列表 end -->
+    </div>
+</div>
+
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/jquery/jquery.nicescroll.js"></script>
+    <script src="../plugins/layui/layui.js"></script>
+    <script src="http://how2j.cn/study/vue.min.js"></script>
+    <script src="../js/plan-index/plan-index.js"></script>
+    <script src="../js/nav/nav.js"></script>
+
+    <script>
+        function init(){
+            $(".tab-item").mouseover(function(){
+                $(".plan-war").removeClass("show-war");
+                $(this).addClass("on").siblings().removeClass("on");
+            });
+            $("#tab-item").mouseenter(function(){
+                $(".plan-war").addClass("show-war");
+            });
+
+            $("#menu-handler").click(function () {
+                // alert("aa")
+                $("#page-seek").toggleClass("seek");
+                $("#menu-handler").toggleClass("off");
+                // $(".page").toggleClass("page-to");
+            });
+            $(".menu-bd a").click(function () {
+                $(this).addClass('active').siblings().removeClass('active');
+            });
+
+            $(".ri-info").mouseenter(function(){
+                $(".author").css("opacity",1);
+                $(".play").css("opacity",1);
+            })
+            $(".ri-info").mouseleave(function(){
+                $(".author").css("opacity",0);
+                $(".play").css("opacity",0);
+            })
+        }
+
+        let vm = new Vue({
+            // el:'#page',
+            el:'#app',
+           data(){
+                return {
+                    categoryList:[],//获取分页计划数据
+                    hotPlan:[],//获取热门计划数据
+                    scorePlan:[],//获取评分计划数据
+                    allPlan:[],//获取所有计划数据
+                    user:"",//用户名
+                    pic:"",//用户头像
+                    imgUrl:"",
+                    typeahead:"",//获取输入框的value
+                    targetActive:0,//标记位
+                    dayActive:0,
+                    equipmentActive:0,
+                    tpointActive:0,
+                    difficultActive:0,
+                    hotActive:0,
+                    scoreActive:0,
+
+                    planTarget:[
+                        {index:0,name:'不限目标'},
+                        {index:1,name:'减脂'},
+                        {index:2,name:'塑性'},
+                        {index:3,name:'增肌'},
+                    ],
+                    planDay:[
+                        {index:0,name:'不限天数'},
+                        {index:1,name:'2天'},
+                        {index:2,name:'3天'},
+                        {index:3,name:'4天'},
+                        {index:4,name:'5天/以上'},
+                    ],
+                    planEquipment:[
+                        {index:0,name:'不限器械'},
+                        {index:1,name:'徒手'},
+                        {index:2,name:'哑铃'},
+                        {index:3,name:'健身房'},
+                    ],
+                    planTpoint:[
+                        {index:0,name:'不限部位'},
+                        {index:1,name:'胸部'},
+                        {index:2,name:'背部'},
+                        {index:3,name:'肩部'},
+                        {index:4,name:'腹部'},
+                        {index:5,name:'臀部'},
+                        {index:6,name:'腿部'},
+                        {index:7,name:'肱二头肌'},
+                        {index:8,name:'肱三头肌'},
+                        {index:9,name:'全身'},
+                    ],
+                    planDifficult:[
+                        {index:0,name:'不限难度'},
+                        {index:1,name:'H1'},
+                        {index:2,name:'H2'},
+                        {index:3,name:'H3'},
+                        {index:4,name:'H4'},
+                        {index:5,name:'H5'},
+                    ],
+                    text:[
+                        {planTarget:''},
+                        {planDay:''},
+                        {planEquipment:''},
+                        {planTpoint:''},
+                        {planDifficult:''},
+                    ],
+                    hotTitle:[
+                        {index:0,name:"按参与人数"},
+                        {index:1,name:"按计划评分"},
+                    ],
+
+                }
+            },
+            computed: {
+
+            },
+            watch:{
+                targetActive(nval,oval){
+                    // alert(oval+"变为"+nval)
+                    if (nval==''||nval==0) {nval=0}
+                    this.text.planTarget="/"+this.planTarget[nval].name
+                },
+                dayActive(nval,oval){
+                    // alert(oval+"变为"+nval)
+                    if (nval==''||nval==0) {nval=0}
+                    this.text.planDay="/"+this.planDay[nval].name
+                },
+                equipmentActive(nval,oval){
+                    // alert(oval+"变为"+nval)
+                    if (nval==''||nval==0) {nval=0}
+                    this.text.planEquipment="/"+this.planEquipment[nval].name
+                },
+                tpointActive(nval,oval){
+                    // alert(oval+"变为"+nval)
+                    if (nval==''||nval==0) {nval=0}
+                    this.text.planTpoint="/"+this.planTpoint[nval].name
+                },
+                difficultActive(nval,oval){
+                    // alert(oval+"变为"+nval)
+                    if (nval==''||nval==0) {nval=0}
+                    this.text.planDifficult="/"+this.planDifficult[nval].name
+                }
+            },
+            filters:{
+                ellipsis(value){
+                    if (!value) return ''
+                    if (value.length > 58) {
+                        return value.slice(0,58)+'...'
+                    }
+                    return value
+                }
+            },
+            methods:{
+                target(i){
+                    this.targetActive = i;
+                    // this.$options.methods.sendRequest();//在methods中调用另一个方法
+                    if (this.targetActive == 0){this.targetActive=''}
+                    if (this.dayActive == 0){this.dayActive=''}
+                    if (this.equipmentActive == 0){this.equipmentActive=''}
+                    if (this.tpointActive == 0){this.tpointActive=''}
+                    if (this.difficultActive == 0){this.difficultActive=''}
+                    $.ajax({
+                        url:`/KeepMovingFiness/plans?planName=${this.typeahead}&planTarget=${this.targetActive}&planDay=${this.dayActive}&planEquipment=${this.equipmentActive}&planTpoint=${this.tpointActive}&planDifficult=${this.difficultActive}`,
+                        type:"get",
+                        dataType:'json',
+                        async:false,//注意添加async：false 同步参数
+                        success:(data) => {
+                        if (data.codeStatus == 'OK') {
+
+                        var data = data.data;
+                            this.page(data);
+                        this.categoryList = data.list;
+
+                    }
+                },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                })
+                },
+                sear:function(){
+                    if (this.targetActive == 0){this.targetActive=''}
+                    if (this.dayActive == 0){this.dayActive=''}
+                    if (this.equipmentActive == 0){this.equipmentActive=''}
+                    if (this.tpointActive == 0){this.tpointActive=''}
+                    if (this.difficultActive == 0){this.difficultActive=''}
+                    $.ajax({
+                        url:`/KeepMovingFiness/plans?planName=${this.typeahead}&planTarget=${this.targetActive}&planDay=${this.dayActive}&planEquipment=${this.equipmentActive}&planTpoint=${this.tpointActive}&planDifficult=${this.difficultActive}`,
+                        type:"get",
+                        dataType:'json',
+                        async:false,//注意添加async：false 同步参数
+                        success:(data) => {
+                        if (data.codeStatus == 'OK') {
+                        var data = data.data;
+                        this.categoryList = data.list;
+                    }
+                },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                })
+                },
+                day(i){
+                    this.dayActive = i;
+                    if (this.targetActive == 0){this.targetActive=''}
+                    if (this.dayActive == 0){this.dayActive=''}
+                    if (this.equipmentActive == 0){this.equipmentActive=''}
+                    if (this.tpointActive == 0){this.tpointActive=''}
+                    if (this.difficultActive == 0){this.difficultActive=''}
+                    $.ajax({
+                        url:`/KeepMovingFiness/plans?planName=${this.typeahead}&planTarget=${this.targetActive}&planDay=${this.dayActive}&planEquipment=${this.equipmentActive}&planTpoint=${this.tpointActive}&planDifficult=${this.difficultActive}`,
+                        type:"get",
+                        dataType:'json',
+                        async:false,//注意添加async：false 同步参数
+                        success:(data) => {
+                        if (data.codeStatus == 'OK') {
+
+                        var data = data.data;
+                            this.page(data);
+                        this.categoryList = data.list;
+                    }
+                },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                })
+                },
+                equipment(i){
+                    this.equipmentActive=i;
+                    if (this.targetActive == 0){this.targetActive=''}
+                    if (this.dayActive == 0){this.dayActive=''}
+                    if (this.equipmentActive == 0){this.equipmentActive=''}
+                    if (this.tpointActive == 0){this.tpointActive=''}
+                    if (this.difficultActive == 0){this.difficultActive=''}
+                    $.ajax({
+                        url:`/KeepMovingFiness/plans?planName=${this.typeahead}&planTarget=${this.targetActive}&planDay=${this.dayActive}&planEquipment=${this.equipmentActive}&planTpoint=${this.tpointActive}&planDifficult=${this.difficultActive}`,
+                        type:"get",
+                        dataType:'json',
+                        async:false,//注意添加async：false 同步参数
+                        success:(data) => {
+                        if (data.codeStatus == 'OK') {
+
+                        var data = data.data;
+                            this.page(data);
+                        this.categoryList = data.list;
+                    }
+                },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                })
+                },
+                tpoint(i){
+                    this.tpointActive = i
+                    if (this.targetActive == 0){this.targetActive=''}
+                    if (this.dayActive == 0){this.dayActive=''}
+                    if (this.equipmentActive == 0){this.equipmentActive=''}
+                    if (this.tpointActive == 0){this.tpointActive=''}
+                    if (this.difficultActive == 0){this.difficultActive=''}
+                    $.ajax({
+                        url:`/KeepMovingFiness/plans?planName=${this.typeahead}&planTarget=${this.targetActive}&planDay=${this.dayActive}&planEquipment=${this.equipmentActive}&planTpoint=${this.tpointActive}&planDifficult=${this.difficultActive}`,
+                        type:"get",
+                        dataType:'json',
+                        async:false,//注意添加async：false 同步参数
+                        success:(data) => {
+                        if (data.codeStatus == 'OK') {
+
+                        var data = data.data;
+                            this.page(data);
+                        this.categoryList = data.list;
+                    }
+                },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                })
+                },
+                difficult(i){
+                    this.difficultActive=i
+                    if (this.targetActive == 0){this.targetActive=''}
+                    if (this.dayActive == 0){this.dayActive=''}
+                    if (this.equipmentActive == 0){this.equipmentActive=''}
+                    if (this.tpointActive == 0){this.tpointActive=''}
+                    if (this.difficultActive == 0){this.difficultActive=''}
+                    $.ajax({
+                        url:`/KeepMovingFiness/plans?planName=${this.typeahead}&planTarget=${this.targetActive}&planDay=${this.dayActive}&planEquipment=${this.equipmentActive}&planTpoint=${this.tpointActive}&planDifficult=${this.difficultActive}`,
+                        type:"get",
+                        dataType:'json',
+                        async:false,//注意添加async：false 同步参数
+                        success:(data) => {
+                        if (data.codeStatus == 'OK') {
+
+                        var data = data.data;
+                            this.page(data);
+                        this.categoryList = data.list;
+                    }
+                },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                })
+                },
+                pageData(){
+                    $.ajax({
+                        url:`/KeepMovingFiness/plans?pageNum=${this.pageNum}`,
+                        type:"get",
+                        success:(data) => {
+                            // console.log(data)
+                            if (data.codeStatus == 'OK') {
+                                var data = data.data;
+                                // this.page(data);
+                                this.categoryList = data.list;
+                            }
+                        },
+                        error:function (err) {
+                            console.log(err)
+                        }
+                    })
+                },
+                page(data){
+                    // 分页
+                    layui.use(['laypage', 'layer'], function () {
+                        var laypage = layui.laypage
+                            , layer = layui.layer;
+                        laypage.render({
+                            elem: 'demo7'
+                            ,count: data.total
+                            , limit:data.pageSize
+                            , theme: '#c83939'
+                            , jump: function (obj,first) {
+                                // console.log(obj)
+                                if (!first){
+                                    // console.log(obj.curr)
+                                    vm.pageNum = obj.curr;
+                                    vm.pageData();
+                                }
+                            }
+                        });
+                    });
+                },
+                //点击后跳转页面并向后台发送ajax请求
+                getPlan(val) {
+                    $.ajax({
+                        url:`/KeepMovingFiness/plan-detail/detail?id=${val}`,
+                        type:"post",
+                        success:(data) => {
+                            // console.log(data)
+                            if (data.codeStatus == 'OK') {
+                                // var data = data.data;
+                                // // this.page(data);
+                                // this.categoryList = data.list;
+                            }
+                        },
+                        error:function (err) {
+                            console.log(err)
+                        }
+                    })
+                    // return 'http://localhost:8081/KeepMovingFiness/plan-detail/detail?id='+val
+                },
+                exit(){
+                    $.ajax({
+                        url:`/KeepMovingFiness/exit`,
+                        type:"post",
+                        success:(data) => {
+                        // console.log(data)
+                        if (data.codeStatus == 'OK') {
+                        // var data = data.data;
+                        // // this.page(data);
+                        // this.categoryList = data.list;
+                    }
+                },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                })
+                }
+
+
+            },
+            mounted(){
+                init()
+            },
+            created(){
+                ajax1=$.ajax({
+                    url:'/KeepMovingFiness/plans',
+                    type:"get",
+                    success:(data) => {
+                         // console.log(data)
+                        if (data.codeStatus == 'OK') {
+                            var data = data.data;
+                             // console.log(data)
+                            this.categoryList = data.list;
+                            this.page(data);
+                            this.categoryList = data.list;
+                            console.log(this.categoryList)
+
+                        }
+
+                        // this.categoryList
+
+                    },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                }),
+                $.ajax({
+                    url:"/KeepMovingFiness/hot",
+                    type:"get",
+                    success:(data) => {
+                    if (data.codeStatus == 'OK') {
+                    this.hotPlan = data.data;
+                    // console.log(this.hotPlan)
+                    }
+                },
+                error:function (err) {
+                    console.log(err)
+                    }
+                }),
+                $.ajax({
+                    url:"/KeepMovingFiness/score",
+                    type:"get",
+                    success:(data) => {
+                        if (data.codeStatus == 'OK') {
+                        this.scorePlan = data.data;
+                            // console.log(this.scorePlan)
+                        }
+                    },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                }),
+                $.ajax({
+                    url:"/KeepMovingFiness/all",
+                    type:"get",
+                    success:(data) => {
+                        if (data.codeStatus == 'OK') {
+                            this.allPlan = data.data;
+                            // console.log(this.allPlan)
+                        }
+                    },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                }),
+                    $.ajax({
+                        url:"/KeepMovingFiness/user",
+                        type:"get",
+                        xhrFields: {withCredentials: true},
+                        success:(data) => {
+                            if (data.codeStatus == 'OK') {
+                                this.user = data.data;
+                                console.log(this.user)
+                            }
+                        },
+                        error:function (err) {
+                            console.log(err)
+                        }
+                    }),
+
+                // $.when(ajax1).done(function () {
+                    $.ajax({
+                        url:"/KeepMovingFiness/pic",
+                        type:"get",
+                        xhrFields: {withCredentials: true},
+                        success:(data) => {
+                        if (data.codeStatus == 'OK') {
+                        // console.log(data)
+                        this.pic = data.data;
+                        // this.imgUrl = this.pic.imgUrl;
+                        console.log(this.pic)
+                        // console.log(this.pic.imgUrl)
+                    }
+                },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                })
+                // })
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>

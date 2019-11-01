@@ -1,0 +1,345 @@
+
+* {
+    box-sizing: border-box;
+}
+div {
+    display: block;
+}
+body, html {
+    font-family: "Microsoft Yahei",Helvetica,Tahoma,"SimSun",sans-serif;
+}
+body {
+    line-height: 1;
+    min-width: 1300px;
+}
+html {
+    color: -internal-root-color;
+}
+.o-personal {
+    background-color: #f2f2f2;
+}
+.o-personal-bd {
+    background-color: #fbfbfb;
+    position: relative;
+    margin-top: 15px;
+}
+.o-personal-bd .col-aside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 285px;
+    height: 100%;
+    background-color: #fff;
+}
+.base-profile {
+    padding: 25px 36px;
+}
+.o-user-form .line {
+   
+    margin-bottom: 15px;
+}
+.u-button {
+    height: 36px;
+    line-height: 36px;
+    color: #fff;
+    font-size: 14px;
+    width: 120px;
+    text-align: center;
+    background-color: #2674e9;
+    display: inline-block;
+    font-family: Tahoma,"Microsoft YaHei",sans-serif;
+    -webkit-transition: 500ms all ease;
+    transition: 500ms all ease;
+}
+.o-personal-bd .col-aside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 285px;
+    height: 100%;
+    background-color: #fff;
+}
+ol, ul, menu {
+    list-style: none outside none;
+}
+.o-personal-nav li {
+    font-size: 16px;
+    color: #333;
+}
+.o-personal-nav li.cur a {
+    cursor: default;
+    color: #2674e9;
+}
+.o-personal-nav li em {
+    display: block;
+    height: 62px;
+    line-height: 62px;
+    margin: 0 20px;
+    border-bottom: 1px solid #efefef;
+}
+.o-personal-nav li.cur i {
+    display: block;
+}
+.o-personal-nav li a i {
+    width: 16px;
+    height: 58px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -29px;
+    background-color: #2674e9;
+    display: none;
+}
+.o-personal-nav li {
+    font-size: 16px;
+    color: #333;
+}
+.o-personal-nav li a {
+    display: block;
+    text-align: center;
+    position: relative;
+    font-family: Tahoma,"Microsoft YaHei",sans-serif;
+}
+.o-personal-nav li em {
+    display: block;
+    height: 62px;
+    line-height: 62px;
+    margin: 0 20px;
+    border-bottom: 1px solid #efefef;
+}
+.o-personal-nav li a i {
+    width: 16px;
+    height: 58px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -29px;
+    background-color: #2674e9;
+    display: none;
+}
+i, em {
+    font-style: normal;
+}
+
+.o-user-form .line:before, .o-user-form .line:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+}
+.o-user-form .line .cont {
+    line-height: 32px;
+    overflow: hidden;
+}
+.u-head-update {
+    display: inline-block;
+}
+
+.u-head-update .preview {
+    float: left;
+    width: 150px;
+    height: 150px;
+    margin-right: 23px;
+}
+.u-head-update input {
+    position: absolute;
+    top: -3000px;
+    left: 0;
+}
+.u-head-update .update {
+    width: 80px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    color: #333;
+}
+.o-user-form .form-note {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 14px;
+    color: #2674e9;
+}
+
+
+.o-user-form .raido input {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+button, input, select, textarea {
+    font-family: Microsoft Yahei,Hiragino Sans GB,WenQuanYi Micro Hei,sans-serif;
+    margin: 0;
+}
+.o-user-form .raido {
+    margin-right: 12px;
+}
+.o-user-form .form-note {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 14px;
+    color: r#2674e9;
+}
+.u-button {
+    height: 36px;
+    line-height: 36px;
+    color: #fff;
+    font-size: 14px;
+    width: 120px;
+    text-align: center;
+    background-color: #2674e9;
+    display: inline-block;
+    font-family: Tahoma,"Microsoft YaHei",sans-serif;
+    -webkit-transition: 500ms all ease;
+    transition: 500ms all ease;
+}
+body a, html a {
+    text-decoration: none!important;
+    color: #8c8c8c;
+}
+.base-profile {
+    padding: 25px 36px;
+}
+.o-personal-bd .col-main {
+    padding-left: 285px;
+    min-height: 750px;
+    background-color: #fbfbfb;
+}
+.o-personal .inner {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 1200px;
+    margin: 0 auto;
+}
+.o-user-form .input-text em {
+    color: #999;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 8px;
+}
+.o-user-form .standar-guide {
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #5a99e0;
+    font-size: 14px;
+    color: #5a99e0;
+    text-align: center;
+    width: 72px;
+    display: inline-block;
+    margin-left: 20px;
+}
+.o-user-form .label {
+    float: left;
+    font-size: 14px;
+    line-height: 32px;
+    margin-right: 30px;
+    font-family: Tahoma,"Microsoft YaHei",sans-serif;
+}
+.account-basic-wrapper .section {
+    padding: 15px 0 18px;
+    border-bottom: solid 1px #efefef;
+    *zoom: 1;
+}
+.account-basic-wrapper .desc {
+    color: #555;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.5em;
+}
+.account-basic-wrapper .desc span {
+    color: #2674e9;
+    font-weight: 600;
+    font-size: 17px;
+}
+.account-basic-wrapper .desc h4 {
+    color: #333;
+    font-weight: 600;
+    margin: 10px 0;
+    font-size: 17px;
+}
+.account-basic-wrapper .item {
+    padding: 15px 0;
+    border-bottom: solid 1px #efefef;
+    *zoom: 1;
+}
+.account-basic-wrapper .item.weixin .icon{
+    background-size: 84px 4085px;
+    background-image: url();
+}
+.account-basic-wrapper .item .status {
+    width: 80px;
+}
+.account-basic-wrapper .item span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+    color: #999;
+    font-size: 13px;
+}
+
+
+#demo1 {
+    width: 92px;
+    height: 92px;
+    margin: 0 10px 10px 0;
+}
+.layui-upload{
+    height: 130px;
+}
+.layui-upload-list{
+    float: left;
+}
+.layui-upload-list::after{
+    content: "";
+    clear: both;
+}
+.layui-btn{
+    height: 34px;
+    line-height: 34px;
+    padding: 0 14px;
+    margin:10px 0 0 20px;
+}
+.layui-input-block{
+    margin-left: 58px;
+}
+.layui-input{
+    height: 33px;
+    width: 181px;
+}
+.block>input{
+    display: none;
+}
+.u-button{
+    background-color: #009688;
+    border-radius: 2px;
+}
+.o-personal-nav li.cur a{
+    color: #009688;
+}
+.o-personal-nav li a i{
+    background-color: #009688;
+}
+select{
+    border-color: #b4b3b39c;
+    margin-top: 7px;
+    color: #807f7f;
+}
+.o-user-form .line {
+    margin-bottom: 28px;
+}
+.layui-input-inline{
+    top: -4px;
+}
+.layui-input-block em{
+    color: #807f7f;
+    position: absolute;
+    left: 203px;
+    top: 3px;
+}
+.formEdit li:first-child{
+    height: 900px;
+}
+#address select{width: 80px;height: 30px;border: 1px solid #c0c0c0;border-radius: 5px;outline: none;}
+		#address select option{width: 80px;max-width: 100px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+

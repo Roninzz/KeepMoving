@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+}
+
+/* 设置背景 */
+body {
+    background-color: rgb(202, 200, 200);
+    /* background-image: url(img/111.png); */
+    background-image: url(../../imgs/foods/food-detail/background01.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    opacity: 0.8;
+}
+
+/* 设置盒子位置 */
+.father {
+    color: white;
+    text-align: center;
+
+    width: 450px;
+    height: 450px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    /* background-color:yellow; */
+    margin: auto;
+}
+
+/* 设置忘记密码样式 */
+#a1 {
+    color: rgb(252, 109, 109);
+}
+
+/* 设置按钮效果 */
+#btn_login {
+    /* width: 80px;
+    color: rgb(107, 16, 16); */
+    color: white;
+    background: gray;
+    border: none;
+    margin: 0px 6px;
+    padding: 8px 0px;
+    outline: none;
+    width: 22%;
+    font-size: 1.1em;
+    cursor: pointer;
+    letter-spacing: 2px;
+    font-weight: 400;
+    font-family: 'Oleo Script', cursive;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+}
+
+#btn_register{
+    color: white;
+    background: gray;
+    border: none;
+    margin: 0px 22px;
+    padding: 8px 0px;
+    outline: none;
+    width: 22%;
+    font-size: 1.1em;
+    cursor: pointer;
+    letter-spacing: 2px;
+    font-weight: 400;
+    font-family: 'Oleo Script', cursive;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+}
+
+/* 设置鼠标划过按钮样式 */
+#btn_login:hover {
+    background-color: rgb(202, 201, 201);
+}
+#btn_register:hover {
+    background-color: rgb(202, 201, 201);
+}

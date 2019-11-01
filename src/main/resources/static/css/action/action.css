@@ -1,0 +1,20 @@
+
+.action{
+    margin: 0 auto;
+    width: 600px;
+    /* height:600px; */
+}
+.action-video{
+    /* padding-top:80px;  */
+    text-align: center;
+    /* position: relative; */
+    margin: 0 auto;
+}
+#video {width: 600px;height:600px;position: relative;}
+.action-direction{
+    width: 600px;
+}
+.name{font-size: 16px;font-weight: bold;margin-top:20px;margin-bottom: 20px;}
+.action-tutorial li{
+    padding: 10px;
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--强制让mybatis框架使用log4j日志-->
+<!--        <setting name="logImpl" value="LOG4J"></setting>-->
+        <!--允许插入null值,mysql驱动默认是支持插入null值-->
+        <setting name="jdbcTypeForNull" value="NULL"></setting>
+        <!--匈牙利命名的表列可以映射到对象属性的驼峰-->
+        <setting name="mapUnderscoreToCamelCase" value="true"></setting>
+
+<!--        <setting name="logImpl" value="STDOUT_LOGGING" />-->
+        <!--
+        lazyLoadingEnabled：设置懒加载，默认为false。如果为false：则所有相关联的都会被初始化加载。
+        aggressiveLazyLoading：默认为true。当设置为true时，懒加载的对象可能被任何懒属性全部加载；否则，每个属性按需加载。
+        -->
+        <!-- 打开延迟加载的开关 -->
+        <setting name="lazyLoadingEnabled" value="true" />
+        <!-- 将积极加载改为消息加载即按需加载  -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 改变默认配置,使只有调用clone方法的时候才会触发完全加载
+         默认情况下,当对象调用了hashCode,equals,clone,toString()都会是延迟加载失效-->
+        <setting name="lazyLoadTriggerMethods" value="clone"/>
+        <!--开启二级缓存 - 二级缓存的一个总的开关-->
+        <setting name="cacheEnabled" value="true"></setting>
+    </settings>
+
+    <!--类的别名-->
+    <typeAliases>
+<!--        扫包,只要在这个目录下面的类型,都会采用类名小写或者类名的简称作为别名-->
+        <package name="com.keepmoving.fitness.entity"></package>
+    </typeAliases>
+
+    <!--分页插件-->
+<!--    <plugins>-->
+<!--        <plugin interceptor="com.github.pagehelper.PageInterceptor">-->
+<!--            <property name="dialect" value="com.github.pagehelper.PageHelper"></property>-->
+<!--        </plugin>-->
+<!--    </plugins>-->
+
+
+</configuration>

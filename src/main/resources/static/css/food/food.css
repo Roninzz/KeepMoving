@@ -1,0 +1,84 @@
+body{
+    width: 100%;
+    box-sizing: border-box;
+    /* font-family: Georgia, Times, 'Times New Roman', serif; */
+}
+
+ul{
+    list-style: none;
+    padding: 0px;
+}
+a{
+    text-decoration: none;
+    /* display: block; */
+}
+
+
+/* 主体内容 */
+
+.food-main{
+    width: 1180px;
+    height: 700px;
+    margin: 20px auto;
+}
+
+/* 标题 */
+.food-title{
+    height: 25px;
+    border-left: 5px solid red;
+}
+.food-title h3{
+    padding-left: 5px;
+}
+
+/* 食物列表 */
+
+.food-list{
+    width: 1180px;
+    height: 600px;
+}
+
+.food-list .food-group{
+    border: 1px solid ghostwhite;
+    /* 设置边框的阴影部分 */
+    box-shadow: -1px -2px Azure;
+    width: 380px;
+    height: 120px;
+    float: left;
+    margin: 15px 0px 15px 10px;
+}
+
+.food-list .food-group .food-img{
+    /* display: inline; */
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+
+.food-list .food-group .food-name{
+    margin:10px 0px 0px 10px;
+    width: 250px;
+    height: 20px;
+    float: left;
+}
+.food-list .food-group .food-name span{
+    
+    font-size: 14px;
+    color: #3f73de;
+    font-weight: bold;
+}
+
+.food-list .food-group .food-detail{
+    width: 260px;
+    height: 50px;
+    float: left;
+}
+.food-list .food-group .food-detail span{
+
+    font-size: 13px;
+    float: left;
+    color: #666;
+    padding: 10px 0px 0px 10px ;
+    opacity: 0.5;
+}
+

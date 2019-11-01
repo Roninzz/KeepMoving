@@ -1,0 +1,43 @@
+.layui-nav .layui-nav-item a{
+    text-decoration: none;
+}
+
+.daohang {
+    margin-left: 10px;
+    height: 30px;
+}
+
+.header-index {
+    border: none;
+    /* 背景色 */
+    background-color: #101010;
+}
+
+.layui-nav {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+
+.logo {
+    position: absolute;
+    left: 0;
+    top: 16px;
+    padding-left: 40px;
+    padding-top: 3px;
+    color: DarkSlateGray;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.header-index .layui-nav .layui-nav-item {
+    margin: 0 20px;
+}
+
+.video-head-wrap {
+    padding-bottom: 58.44907407407407% !important;
+
+}
+
+.body-wrap {
+    padding-top: 58.44907407407407%;
+}
